@@ -48,7 +48,7 @@ class Login extends React.Component<{}, { email: string; password: string }> {
               color="text.secondary"
               gutterBottom
             >
-              Word of the Day
+              <h4> Have an account already? login 👇</h4>
             </Typography>
 
             <TextField

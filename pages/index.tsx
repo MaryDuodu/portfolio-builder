@@ -50,7 +50,7 @@ const Home: NextPage = () => {
               transform: "translate(-50%, -50%)",
             }}
           >
-            sfdasdfsdf
+            <h3>Build your own portfolio in just a few seconds</h3>
           </div>
         </section>
 
