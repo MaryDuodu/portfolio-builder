@@ -1,12 +1,12 @@
-import { Button, Grid, Toolbar, Typography } from '@mui/material'
-import { green } from '@mui/material/colors'
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import CreateAccount from '../components/create-account'
-import Login from '../components/login'
-import Navbar from '../components/navbar'
-import styles from '../styles/Home.module.css'
+import { Button, Grid, Toolbar, Typography } from "@mui/material";
+import { green } from "@mui/material/colors";
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import CreateAccount from "../components/create-account";
+import Login from "../components/login";
+import Navbar from "../components/navbar";
+import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   return (
@@ -20,11 +20,13 @@ const Home: NextPage = () => {
       <main>
         <Navbar />
 
-
-        <section style={{
-          position: 'relative', color: "white", textAlign: 'center'
-        }}>
-
+        <section
+          style={{
+            position: "relative",
+            color: "white",
+            textAlign: "center",
+          }}
+        >
           {/* <Image
           style={{ height: '50px'}}
           src="/images/intro-bg.jpg"
@@ -33,28 +35,37 @@ const Home: NextPage = () => {
           layout="intrinsic"
           alt="Your Name"
         /> */}
-          <img src="/images/intro-bg.jpg" alt="Your Name" style={{ height: '80vh', width: "100%", marginTop: "5px" }} />
+          <img
+            src="/images/intro-bg.jpg"
+            alt="Your Name"
+            style={{ height: "80vh", width: "100%", marginTop: "5px" }}
+          />
 
-          <div style={{ color: 'green', position: 'absolute', top: "50%", left: "50%", transform: 'translate(-50%, -50%)' }}>sfdasdfsdf</div>
+          <div
+            style={{
+              color: "green",
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          >
+            sfdasdfsdf
+          </div>
         </section>
-
 
         {/* Features */}
-        <section>q
-
-        </section>
+        <section></section>
 
         {/* Create Account */}
-        <section style={{ height: '80vh' }} id="signup">
+        <section style={{ height: "80vh" }} id="signup">
           <Typography sx={{ fontSize: 30, fontWeight: "bold" }}>
             Share you potfolio with the world today!
           </Typography>
 
           <Grid container spacing={2}>
             <Grid item xs={0} md={9} lg={6}>
-
               <Login />
-
             </Grid>
 
             <Grid item xs={12} md={3} lg={6}>
@@ -62,46 +73,6 @@ const Home: NextPage = () => {
             </Grid>
           </Grid>
         </section>
-
-
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
       </main>
 
       <footer className={styles.footer}>
@@ -110,14 +81,14 @@ const Home: NextPage = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <span className={styles.logo}>
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

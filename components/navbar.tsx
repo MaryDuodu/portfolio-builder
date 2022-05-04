@@ -1,6 +1,15 @@
-import { AppBar, Box, Button, CssBaseline, makeStyles, MenuItem, Toolbar, Typography } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Button,
+  CssBaseline,
+  makeStyles,
+  MenuItem,
+  Toolbar,
+  Typography,
+} from "@mui/material";
 import Link from "next/link";
-import styles from './navbar.module.css'
+import styles from "./navbar.module.css";
 
 // const useStyles = makeStyles((theme: any) => ({
 //     navlinks: {
@@ -24,43 +33,41 @@ import styles from './navbar.module.css'
 // }));
 
 const pages = [
-
-    { title: "About", link: "#about" },
-    { title: "Features", link: "#features" },
-    { title: "Testimonials", link: "#testimonials" },
-    { title: "Login", link: "/login" },
-    { title: "Create Account", link: "#signup" }
+  { title: "About", link: "#about" },
+  { title: "Features", link: "#features" },
+  { title: "Testimonials", link: "#testimonials" },
+  { title: "Login", link: "#signup" },
+  { title: "Create Account", link: "#signup" },
 ];
 
 function Navbar() {
-    let user: any = {}
-    // const classes = useStyles;
-    if (typeof window != 'undefined') {
-        user = localStorage?.getItem("user")
-    }
+  let user: any = {};
+  // const classes = useStyles;
+  if (typeof window != "undefined") {
+    user = localStorage?.getItem("user");
+  }
 
-    return (
-        <AppBar position="static">
-            {/* <CssBaseline /> */}
+  return (
+    <AppBar position="static">
+      {/* <CssBaseline /> */}
 
-            <Toolbar>
-                <Typography variant="h4" style={{ flex: 1 }}>
-                    PORTFOLIO BUILDER
-                </Typography>
+      <Toolbar>
+        <Typography variant="h4" style={{ flex: 1 }}>
+          PORTFOLIO BUILDER
+        </Typography>
 
-                {pages.map((page) => (
-                    <MenuItem key={page.title} >
-                        <Link href={page.link}>
-                            <Typography textAlign="center">
-                                <a className={styles.link}> {page.title}</a>
-                            </Typography>
-                        </Link>
-                    </MenuItem>
-                ))}
-
-            </Toolbar>
-        </AppBar>
-    );
+        {pages.map((page) => (
+          <MenuItem key={page.title}>
+            <Link href={page.link}>
+              <Typography textAlign="center">
+                <a className={styles.link}> {page.title}</a>
+              </Typography>
+            </Link>
+          </MenuItem>
+        ))}
+      </Toolbar>
+    </AppBar>
+  );
 }
 
 export default Navbar;
