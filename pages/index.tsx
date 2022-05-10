@@ -58,9 +58,9 @@ const Home: NextPage = () => {
         <section></section>
 
         {/* Create Account */}
-        <section style={{ height: "80vh" }} id="signup">
+        <section style={{ height: "80vh" }} id="signup" color="#A49675">
           <Typography sx={{ fontSize: 30, fontWeight: "bold" }}>
-            Share you portfolio with the world today!
+            Share your potfolio with the world today!
           </Typography>
 
           <Grid container spacing={2}>

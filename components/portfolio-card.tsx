@@ -11,9 +11,7 @@ const bull = (
   <Box
     component="span"
     sx={{ display: "inline-block", mx: "2px", transform: "scale(0.8)" }}
-  >
-    •
-  </Box>
+  ></Box>
 );
 
 export default function PortfolioCard(props: { portfolio: any }) {
@@ -28,21 +26,25 @@ export default function PortfolioCard(props: { portfolio: any }) {
         </Typography>
         Attended {props.portfolio.education?.school}
         From {props.portfolio.education?.from} To{" "}
-        {props.portfolio.education?.to} and obtained
+        {props.portfolio.education?.to} and obtained{" "}
         {props.portfolio.education?.certificate}
         <br />
-        <br />
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+        <Typography variant="h5" component="div">
           Work Experience
         </Typography>
-        <Typography variant="body2">
-          work samples
+        <br />
+        worked in {props.portfolio.Work?.company.name}
+        From {props.portfolio.education?.from} To{" "}
+        {props.portfolio.education?.to} and obtained{" "}
+        {props.portfolio.education?.certificate}
+        <br />
+        <Typography variant="h5" component="div">
+          Notable Experience
           <br />
-          {'"a benevolent smile"'}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button size="small">view</Button>
       </CardActions>
     </Card>
   );
