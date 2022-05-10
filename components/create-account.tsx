@@ -49,12 +49,11 @@ class CreateAccount extends React.Component<
         <form onSubmit={this.handleSubmit}>
           <CardContent>
             <Typography
+              variant="h4"
               sx={{ fontSize: 14 }}
               color="text.secondary"
               gutterBottom
-            >
-              <h4> Create Account to Join now!</h4>
-            </Typography>
+            >Create Account to Join now! </Typography>
 
             <TextField
               required

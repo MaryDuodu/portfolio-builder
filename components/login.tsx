@@ -44,12 +44,11 @@ class Login extends React.Component<{}, { email: string; password: string }> {
         <form onSubmit={this.handleSubmit}>
           <CardContent>
             <Typography
+              variant="h4"
               sx={{ fontSize: 14 }}
               color="text.secondary"
               gutterBottom
-            >
-              <h4> Have an account already? login 👇</h4>
-            </Typography>
+            >Have an account already? login 👇 </Typography>
 
             <TextField
               required

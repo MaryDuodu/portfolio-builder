@@ -60,7 +60,7 @@ const Home: NextPage = () => {
         {/* Create Account */}
         <section style={{ height: "80vh" }} id="signup">
           <Typography sx={{ fontSize: 30, fontWeight: "bold" }}>
-            Share you potfolio with the world today!
+            Share you portfolio with the world today!
           </Typography>
 
           <Grid container spacing={2}>
