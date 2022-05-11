@@ -73,6 +73,53 @@ const Home: NextPage = () => {
             </Grid>
           </Grid>
         </section>
+
+        <section
+          className={styles.about}
+          style={{ height: "80vh", position: "relative" }}
+          id="about"
+          color="#A49675"
+        >
+          <Typography>About Us</Typography>
+          <br />
+
+          {/* <div className={styles.layer}></div> */}
+
+          <Grid container spacing={2}>
+            <Grid md={6}>
+              <img
+                src="./images/aboutp-bgp.jpg"
+                alt="abcd"
+                style={{
+                  height: "70vh",
+                  marginTop: "5px",
+                  marginLeft: "15px",
+                  maxWidth: "fit-content",
+                }}
+                color="#0000"
+              />
+            </Grid>
+
+            <Grid md={6}>
+              <div style={{ margin: "120px" }}>
+                <h2>We help you share your portfolio to the world</h2>
+                <h1>what's a portfolio?</h1>
+                <p>we mentor you to design your own portfolio</p>
+                <p>we give you the opportunity to network with your friends</p>
+              </div>
+            </Grid>
+          </Grid>
+
+          <div
+            style={{
+              color: "black",
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-0%, -0%)",
+            }}
+          ></div>
+        </section>
       </main>
 
       <footer className={styles.footer}>
@@ -80,6 +127,8 @@ const Home: NextPage = () => {
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
+          style={{ height: "80vh" }}
+          color="#003F3B"
         >
           Powered by{" "}
           <span className={styles.logo}>

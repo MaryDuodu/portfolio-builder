@@ -21,7 +21,7 @@
   align-items: center;
   background-color: #5d699f;
   height: 50vh;
-  width: 100vw;
+  width: 100%;
 }
 
 .footer a {
@@ -117,3 +117,14 @@
     flex-direction: column;
   }
 }
+
+.about {
+  background-color: #acc1d6;
+}
+
+/* .layer {
+  background-color: #000;
+  position: "absolute";
+  inset: 0;
+  z-index: 10;
+} */
