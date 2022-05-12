@@ -41,6 +41,12 @@ class NewPortfolio extends React.Component<
       role: string;
       description: string;
     };
+    achievements: {
+      institution: string;
+      year: number;
+      description: string;
+      title: string;
+    };
     selectedTab: number;
     expanded: string | false;
   }
@@ -67,6 +73,12 @@ class NewPortfolio extends React.Component<
         to: 2022,
         description: "",
       },
+      achievements: {
+        institution: "",
+        title: "",
+        year: 2021,
+        description: "",
+      },
       selectedTab: 0,
       expanded: false
     };
@@ -83,6 +95,13 @@ class NewPortfolio extends React.Component<
     // @ts-ignore
     ed[key] = event?.target?.value || "";
     this.setState({ education: ed });
+  }
+
+  handleAchievementsFormChange(event: any, key: string) {
+    const ed = this.state.achievements;
+    // @ts-ignore
+    ed[key] = event?.target?.value || "";
+    this.setState({ achievements: ed });
   }
 
   handleWorkExperienceFormChange(event: any, key: string) {
@@ -105,20 +124,19 @@ class NewPortfolio extends React.Component<
         },
         body: JSON.stringify({
           education: this.state.education,
+          achievements: this.state.achievements,
+          workExperience: this.state.workExperience,
           user: user._id,
         }) as any,
       });
 
-      const json = await resp.json();
       Router.push("./");
-
     }
   }
 
   render() {
     return (
       <Card sx={{ minWidth: 275, height: "max-content" }}>
-
 
         <Box sx={{ width: "100%" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -239,7 +257,7 @@ class NewPortfolio extends React.Component<
                 </Accordion>
 
                 <Accordion expanded={this.state.expanded === 'panel2'}
-                  onChange={(event, isExpanded) => this.handleAccordionChange('panel1', isExpanded)}>
+                  onChange={(event, isExpanded) => this.handleAccordionChange('panel2', isExpanded)}>
                   <AccordionSummary
                     // expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1bh-content"
@@ -321,7 +339,6 @@ class NewPortfolio extends React.Component<
                       fullWidth
                       margin="normal"
                       type="number"
-
                       value={this.state.workExperience.to}
                       onChange={(e) => {
                         this.handleWorkExperienceFormChange(e, "to");
@@ -330,12 +347,83 @@ class NewPortfolio extends React.Component<
                   </AccordionDetails>
                 </Accordion>
 
-                {/* TODO: add work experience forms here  */}
+                <Accordion expanded={this.state.expanded === 'panel3'}
+                  onChange={(event, isExpanded) => this.handleAccordionChange('panel3', isExpanded)}>
+                  <AccordionSummary
+                    // expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1bh-content"
+                    id="panel1bh-header"
+                  >
+                    <Typography sx={{ width: '33%', flexShrink: 0 }}>
+                      Notable Achievements
+                    </Typography>
+                    <Typography sx={{ color: 'text.secondary' }}>Your notable achievements related to this portfolio</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails
+                    style={{ marginLeft: "50px" }}>
 
+                    <TextField
+                      required
+                      id="institution"
+                      label="Institution Name"
+                      variant="outlined"
+                      name="institution"
+                      fullWidth
+                      margin="normal"
+                      value={this.state.achievements.institution}
+                      onChange={(e) => {
+                        this.handleAchievementsFormChange(e, "institution");
+                      }}
+                    />
+
+                    <TextField
+                      required
+                      id="title"
+                      label="Title"
+                      variant="outlined"
+                      name="title"
+                      fullWidth
+                      margin="normal"
+                      value={this.state.achievements.title}
+                      onChange={(e) => {
+                        this.handleAchievementsFormChange(e, "title");
+                      }}
+                    />
+
+                    <TextField
+                      required
+                      id="year"
+                      label="Year you received the award"
+                      variant="outlined"
+                      name="year"
+                      fullWidth
+                      margin="normal"
+                      type="number"
+                      value={this.state.achievements.year}
+                      onChange={(e) => {
+                        this.handleAchievementsFormChange(e, "year");
+                      }}
+                    />
+
+                    <TextField
+                      required
+                      id="description"
+                      label="Brief description of the award and why you deserved it"
+                      variant="outlined"
+                      name="description"
+                      fullWidth
+                      margin="normal"
+                      type="text"
+                      multiline
+                      value={this.state.achievements.description}
+                      onChange={(e) => {
+                        this.handleAchievementsFormChange(e, "description");
+                      }}
+                    />
+
+                  </AccordionDetails>
+                </Accordion>
               </CardContent>
-
-
-
 
               <CardActions>
                 <Button size="small" type="submit">
