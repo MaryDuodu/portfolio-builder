@@ -17,8 +17,6 @@ export default async function handler(
   switch (req.method) {
 
     case 'GET': {
-      console.log(req.query)
-      console.log(req.query)
       const { db } = await connectToDatabase()
       const data = await db.collection('portfolios').find({ user: req.query.user }).toArray()
 

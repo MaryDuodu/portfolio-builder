@@ -63,7 +63,6 @@ class NewPortfolio extends React.Component<
     if (typeof window != "undefined") {
       const user = JSON.parse(localStorage.getItem("user")!) as any;
 
-      console.log(user);
       const resp = await fetch("/api/portfolio", {
         method: "POST",
         headers: {
@@ -76,7 +75,8 @@ class NewPortfolio extends React.Component<
       });
 
       const json = await resp.json();
-      console.log(json);
+      Router.push("./");
+
     }
   }
 

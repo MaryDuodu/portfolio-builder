@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Box,
   Button,
   Divider,
   Grid,
@@ -14,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import CreateAccount from "../../components/create-account";
+import DashboardNavbar from "../../components/dashboard-navbar";
 import Login from "../../components/login";
 import Navbar from "../../components/navbar";
 import PortfolioCard from "../../components/portfolio-card";
@@ -35,9 +37,8 @@ const Dashboard = () => {
         });
 
         const json = await resp.json();
-        console.log(json);
         if (json.success == true) {
-          // setPortfolios(json);
+          setPortfolios(json.data);
         }
       }
     };
@@ -54,9 +55,7 @@ const Dashboard = () => {
       </Head>
 
       <main>
-        <Navbar />
-
-        <Avatar alt="Remy Sharp" src="/images/profile-img.jpg" />
+        <DashboardNavbar />
 
         <Grid container spacing={2}>
           {portfolios.map((item) => (
@@ -67,10 +66,13 @@ const Dashboard = () => {
         </Grid>
 
         <Link href="/dashboard/new-portfolio">
-          <Button variant="contained" color="primary">
-            Add Portfolio
-          </Button>
+          <Box textAlign='center' marginTop="100px">
+            <Button variant="contained" color="primary">
+              Add Portfolio
+            </Button>
+          </Box>
         </Link>
+
       </main>
     </div>
   );
