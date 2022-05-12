@@ -10,42 +10,63 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
+import Router from "next/router";
+import React from "react";
 import styles from "./navbar.module.css";
 
 const pages = [
   { title: "Logout", link: "/" },
 ];
 
-function DashboardNavbar() {
-  let user: any = {};
-  // const classes = useStyles;
-  if (typeof window != "undefined") {
-    user = localStorage?.getItem("user");
+export class DashboardNavbar extends React.Component<{}, { user: any }> {
+  constructor(props: any) {
+    super(props)
+
+    this.state = {
+      user: {}
+    }
   }
 
-  return (
-    <AppBar position="static">
-      <Toolbar>
-        <Typography variant="h4" style={{ flex: 1 }}>
-          Dashboard
-        </Typography>
+  handleLogout() {
+    if (typeof window != "undefined") {
+      localStorage?.removeItem("user");
+      Router.push('./')
+    }
+  }
 
-        {pages.map((page) => (
-          <MenuItem key={page.title}>
-            <Link href={page.link}>
-              <Typography textAlign="center">
-                <a className={styles.link}> {page.title}</a>
-              </Typography>
-            </Link>
+  componentDidMount() {
+    if (typeof window != "undefined") {
+      const resp = localStorage?.getItem("user");
+
+      if (resp == null) {
+        Router.push('./');
+      } else {
+        this.setState({ user: JSON.parse(resp) })
+      }
+
+    }
+  }
+
+
+  render() {
+    return (
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h4" style={{ flex: 1 }}>
+            Dashboard
+          </Typography>
+
+          <MenuItem key="logout" onClick={() => this.handleLogout()}>
+            <Typography textAlign="center">
+              <a className={styles.link}>Logout</a>
+            </Typography>
           </MenuItem>
-        ))}
 
-        {/* <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}> */}
           <Avatar alt="Remy Sharp" src="/images/profile-img.jpg" />
-        {/* </IconButton> */}
-      </Toolbar>
-    </AppBar>
-  );
+        </Toolbar>
+      </AppBar>
+    );
+  }
 }
 
 export default DashboardNavbar;

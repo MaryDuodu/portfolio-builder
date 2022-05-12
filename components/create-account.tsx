@@ -14,6 +14,7 @@ class CreateAccount extends React.Component<
   {},
   { email: string; password: string; fullName: string }
 > {
+
   constructor(props: any) {
     super(props);
 
