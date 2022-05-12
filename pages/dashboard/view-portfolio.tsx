@@ -48,7 +48,8 @@ class ViewPortfolio extends React.Component<
 
   render() {
     return (
-      <Box sx={{ width: "100%" }}>
+      <div style={{margin: "10px"}}>
+        <Divider />
         <Typography variant="h6" component="div" textAlign="center">
           Education Experience
         </Typography>
@@ -140,7 +141,7 @@ class ViewPortfolio extends React.Component<
           Brief description of award:
           {this.props.portfolio.achievements?.description || "N/A"}
         </Typography>
-      </Box>
+      </div>
     );
   }
 }

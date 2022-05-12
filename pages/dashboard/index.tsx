@@ -118,7 +118,7 @@ export class Dashboard extends React.Component<{}, {
                   </CardContent>
 
                   <Dialog onClose={() => this.setState({ showDialog: false })} open={this.state.showDialog}>
-                    <DialogTitle>Set backup account</DialogTitle>
+                    {/* <DialogTitle>Portfolio Details</DialogTitle> */}
                     <ViewPortfolio portfolio={item} />
                   </Dialog>
 
