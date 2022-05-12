@@ -99,7 +99,8 @@ const Dashboard = () => {
                 <CardActions>
                   <Button size="small">view</Button>
                   <br />
-                  <Button size="small" onClick={removePortfolioCard(item)}>
+
+                  <Button size="small" onClick={() =>removePortfolioCard(item)}>
                     delete
                   </Button>
                 </CardActions>

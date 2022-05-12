@@ -1,4 +1,5 @@
 import { Hash } from "crypto";
+import { ObjectId } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../lib/mongodb";
 
@@ -33,18 +34,14 @@ export default async function handler(
     }
     case "DELETE": {
       const { db } = await connectToDatabase();
-      console.log(req.query);
-      await db.collection("portfolios").findOneAndDelete({ _id: req.query.id });
+      const item = await db.collection("portfolios").findOneAndDelete({ _id: new ObjectId(req.query.id as any) });
 
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
         message: "Portfolio deleted successfully",
         data: [],
         loggedIn: true,
       });
-
-      console.log("aasdcg");
-      break;
     }
 
     case "POST": {
