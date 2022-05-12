@@ -15,3 +15,13 @@ Content-Type: application/json
   "email": "ephrim@graceday.shop",
   "password": "theman"
 }
+
+
+### DELETE portfolio
+DELETE  http://localhost:3000/api/portfolio?id=anything
+Content-Type: application/json
+
+{
+  "email": "ephrim@graceday.shop",
+  "password": "theman"
+}

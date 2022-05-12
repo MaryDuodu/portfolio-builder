@@ -45,6 +45,8 @@ export default function PortfolioCard(props: { portfolio: any }) {
       </CardContent>
       <CardActions>
         <Button size="small">view</Button>
+        <br />
+        <Button size="small">delete</Button>
       </CardActions>
     </Card>
   );

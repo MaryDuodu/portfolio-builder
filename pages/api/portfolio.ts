@@ -1,13 +1,13 @@
-import { Hash } from 'crypto'
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { connectToDatabase } from '../../lib/mongodb'
+import { Hash } from "crypto";
+import type { NextApiRequest, NextApiResponse } from "next";
+import { connectToDatabase } from "../../lib/mongodb";
 
 type Data = {
-  success: boolean,
-  message: string,
-  data: any
-  loggedIn: boolean
-}
+  success: boolean;
+  message: string;
+  data: any;
+  loggedIn: boolean;
+};
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,33 +15,49 @@ export default async function handler(
 ) {
   // switch the methods
   switch (req.method) {
-
-    case 'GET': {
-      const { db } = await connectToDatabase()
-      const data = await db.collection('portfolios').find({ user: req.query.user }).toArray()
+    case "GET": {
+      const { db } = await connectToDatabase();
+      const data = await db
+        .collection("portfolios")
+        .find({ user: req.query.user })
+        .toArray();
 
       // create account
       res.status(200).json({
         success: true,
         message: "Portfolio created successfully",
         data: data,
-        loggedIn: true
-      })
+        loggedIn: true,
+      });
+      break;
+    }
+    case "DELETE": {
+      const { db } = await connectToDatabase();
+      console.log(req.query);
+      await db.collection("portfolios").findOneAndDelete({ _id: req.query.id });
+
+      res.status(200).json({
+        success: true,
+        message: "Portfolio deleted successfully",
+        data: [],
+        loggedIn: true,
+      });
+
+      console.log("aasdcg");
       break;
     }
 
-    case 'POST': {
-      const { db } = await connectToDatabase()
-      const portfolio = await db.collection('portfolios').insertOne(req.body)
+    case "POST": {
+      const { db } = await connectToDatabase();
+      const portfolio = await db.collection("portfolios").insertOne(req.body);
 
       // create account
       res.status(200).json({
         success: true,
         message: "Portfolio created successfully",
         data: portfolio,
-        loggedIn: true
-      })
+        loggedIn: true,
+      });
     }
   }
-
 }
