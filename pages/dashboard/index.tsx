@@ -6,19 +6,28 @@ import {
   CardContent,
   CardActions,
   Card,
+  Dialog,
+  DialogTitle,
 } from "@mui/material";
 import Head from "next/head";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import DashboardNavbar from "../../components/dashboard-navbar";
 import styles from "../../styles/Home.module.css";
+import ViewPortfolio from "./view-portfolio";
 
-export class Dashboard extends React.Component<{}, { portfolios: any[] }> {
+export class Dashboard extends React.Component<{}, {
+  portfolios: any[],
+  showDialog: boolean,
+  dialogItem: any
+}> {
   constructor(props: any) {
     super(props);
 
     this.state = {
-      portfolios: []
+      portfolios: [],
+      showDialog: false,
+      dialogItem: {}
     }
   }
 
@@ -36,6 +45,10 @@ export class Dashboard extends React.Component<{}, { portfolios: any[] }> {
       const json = await resp.json();
       if (json.success == true) {
         this.setState({ portfolios: json.data });
+
+        if (json.data.length > 0) {
+          this.setState({ dialogItem: json.data[0] })
+        }
       }
     }
   }
@@ -43,7 +56,6 @@ export class Dashboard extends React.Component<{}, { portfolios: any[] }> {
   componentDidMount() {
     this.fetchPortfolios()
   }
-
 
   removePortfolioCard(item: any) {
     fetch(`/api/portfolio?id=${item._id}`, {
@@ -104,8 +116,19 @@ export class Dashboard extends React.Component<{}, { portfolios: any[] }> {
                       <br />
                     </Typography>
                   </CardContent>
+
+                  <Dialog onClose={() => this.setState({ showDialog: false })} open={this.state.showDialog}>
+                    <DialogTitle>Set backup account</DialogTitle>
+                    <ViewPortfolio portfolio={item} />
+                  </Dialog>
+
                   <CardActions>
-                    <Button size="small">view</Button>
+                    <Button size="small"
+                      onClick={() => this.setState({
+                        showDialog: true,
+                        dialogItem: item
+                      })}
+                    >view</Button>
                     <br />
 
                     <Button size="small" onClick={() => this.removePortfolioCard(item)}>
