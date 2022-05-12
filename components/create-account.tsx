@@ -38,7 +38,7 @@ class CreateAccount extends React.Component<
 
     const json = await resp.json();
     if (typeof window != "undefined" && json.loggedIn == true) {
-      localStorage.setItem("user", JSON.stringify(json));
+      localStorage.setItem("user", JSON.stringify(json.user));
       Router.push("/dashboard");
     }
   }

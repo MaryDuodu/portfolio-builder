@@ -23,10 +23,12 @@ export default async function handler(
     case 'POST': {
       if (req.url?.indexOf("signup")! > -1) {
         const { db } = await connectToDatabase()
-        const user = await db.collection('users').insertOne(req.body)
+        const insert = await db.collection('users').insertOne(req.body)
+
+        const user = await db.collection('users').findOne({ _id: insert.insertedId })
 
         // create account
-        res.status(200).json({
+        return res.status(200).json({
           success: true,
           message: "Account created successfully",
           user: user,

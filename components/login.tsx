@@ -5,20 +5,22 @@ import {
   TextField,
   Typography,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import Router from "next/router";
 import React from "react";
 
-class Login extends React.Component<{}, { email: string; password: string }> {
+class Login extends React.Component<{}, { email: string; password: string, loading: boolean }> {
   constructor(props: any) {
     super(props);
 
-    this.state = { email: "", password: "" };
+    this.state = { email: "", password: "", loading: false };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   async handleSubmit(event: any) {
     event.preventDefault();
+    this.setState({loading: true})
 
     const resp = await fetch("/api/login", {
       method: "POST",
@@ -36,6 +38,7 @@ class Login extends React.Component<{}, { email: string; password: string }> {
       localStorage.setItem("user", JSON.stringify(json.data));
       Router.push("/dashboard");
     }
+    this.setState({loading: false})
   }
 
   render() {
@@ -82,9 +85,13 @@ class Login extends React.Component<{}, { email: string; password: string }> {
           </CardContent>
 
           <CardActions>
-            <Button size="small" type="submit">
-              Login
-            </Button>
+            {this.state.loading && (
+              <CircularProgress size={68} />
+            )}
+
+            {!this.state.loading && (
+              <Button size="small" type="submit"> Login </Button>
+            )}
           </CardActions>
         </form>
       </Card>
