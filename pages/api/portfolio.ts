@@ -34,7 +34,7 @@ export default async function handler(
     }
     case "DELETE": {
       const { db } = await connectToDatabase();
-      const item = await db.collection("portfolios").findOneAndDelete({ _id: new ObjectId(req.query.id as any) });
+      await db.collection("portfolios").findOneAndDelete({ _id: new ObjectId(req.query.id as any) });
 
       return res.status(200).json({
         success: true,
