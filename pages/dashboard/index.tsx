@@ -1,23 +1,12 @@
 import {
-  Avatar,
   Box,
   Button,
-  Divider,
   Grid,
-  Stack,
-  Toolbar,
-  Typography,
 } from "@mui/material";
-import { green } from "@mui/material/colors";
-import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import CreateAccount from "../../components/create-account";
 import DashboardNavbar from "../../components/dashboard-navbar";
-import Login from "../../components/login";
-import Navbar from "../../components/navbar";
 import PortfolioCard from "../../components/portfolio-card";
 import styles from "../../styles/Home.module.css";
 
@@ -57,10 +46,10 @@ const Dashboard = () => {
       <main>
         <DashboardNavbar />
 
-        <Grid container spacing={2}>
-          {portfolios.map((item) => (
-            <Grid item xs={12} md={4} lg={3}>
-              <PortfolioCard portfolio={item} />
+        <Grid container spacing={2} style={{ marginTop: "20px" }}>
+          {portfolios.map((item: any) => (
+            <Grid item xs={12} md={4} lg={3} key={item._id}>
+              <PortfolioCard portfolio={item} key={item._id} />
             </Grid>
           ))}
         </Grid>
