@@ -2,6 +2,10 @@ import {
   Box,
   Button,
   Grid,
+  Typography,
+  CardContent,
+  CardActions,
+  Card,
 } from "@mui/material";
 import Head from "next/head";
 import Link from "next/link";
@@ -12,28 +16,42 @@ import styles from "../../styles/Home.module.css";
 
 const Dashboard = () => {
   const [portfolios, setPortfolios] = useState([]);
+  const fetchPortfolios = async () => {
+    if (typeof window != "undefined") {
+      const user = JSON.parse(localStorage.getItem("user")!) as any;
+
+      const resp = await fetch(`/api/portfolio?user=${user._id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const json = await resp.json();
+      if (json.success == true) {
+        setPortfolios(json.data);
+      }
+    }
+  };
 
   useEffect(() => {
-    const fetchPortfolios = async () => {
-      if (typeof window != "undefined") {
-        const user = JSON.parse(localStorage.getItem("user")!) as any;
-
-        const resp = await fetch(`/api/portfolio?user=${user._id}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        const json = await resp.json();
-        if (json.success == true) {
-          setPortfolios(json.data);
-        }
-      }
-    };
-
     fetchPortfolios();
   });
+
+  const removePortfolioCard = (item: any) => {
+    fetch(`/api/portfolio?id=${item._id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+      },
+    }).then(async (resp) => {
+      const json = await resp.json();
+      if (json.success == true) {
+        await fetchPortfolios();
+        // setPortfolios(json.item);
+      }
+    });
+  };
 
   return (
     <div className={styles.container}>
@@ -49,19 +67,54 @@ const Dashboard = () => {
         <Grid container spacing={2} style={{ marginTop: "20px" }}>
           {portfolios.map((item: any) => (
             <Grid item xs={12} md={4} lg={3} key={item._id}>
-              <PortfolioCard portfolio={item} key={item._id} />
+              <Card sx={{ minWidth: 275 }}>
+                <CardContent>
+                  <Typography
+                    sx={{ fontSize: 14 }}
+                    color="text.secondary"
+                    gutterBottom
+                  >
+                    Portfolio Summary
+                  </Typography>
+                  <Typography variant="h5" component="div">
+                    Education Experience
+                  </Typography>
+                  Attended {item.education?.school}
+                  From {item.education?.from} To {item.education?.to} and
+                  obtained {item.education?.certificate}
+                  <br />
+                  <Typography variant="h5" component="div">
+                    Work Experience
+                  </Typography>
+                  <br />
+                  worked in {item.Work?.company.name}
+                  From {item.education?.from} To {item.education?.to} and
+                  obtained {item.education?.certificate}
+                  <br />
+                  <Typography variant="h5" component="div">
+                    Notable Experience
+                    <br />
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small">view</Button>
+                  <br />
+                  <Button size="small" onClick={removePortfolioCard(item)}>
+                    delete
+                  </Button>
+                </CardActions>
+              </Card>
             </Grid>
           ))}
         </Grid>
 
         <Link href="/dashboard/new-portfolio">
-          <Box textAlign='center' marginTop="100px">
+          <Box textAlign="center" marginTop="100px">
             <Button variant="contained" color="primary">
               Add Portfolio
             </Button>
           </Box>
         </Link>
-
       </main>
     </div>
   );
