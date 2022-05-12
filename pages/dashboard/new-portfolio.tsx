@@ -29,6 +29,14 @@ class NewPortfolio extends React.Component<
       description: string;
       certificate: string;
     };
+    workExperience: {
+      company: string;
+      from: number;
+      to: number;
+      position: string;
+      role: string;
+      description: string;
+    };
     selectedTab: number;
   }
 > {
@@ -45,6 +53,14 @@ class NewPortfolio extends React.Component<
         certificate: "",
         description: "",
       },
+      workExperience: {
+        company: "",
+        position: "",
+        role: "",
+        from: 2021,
+        to: 2022,
+        description: "",
+      },
       selectedTab: 0,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -57,13 +73,19 @@ class NewPortfolio extends React.Component<
     this.setState({ education: ed });
   }
 
+  handleWorkExperienceFormChange(event: any, key: string) {
+    const ed = this.state.workExperience;
+    // @ts-ignore
+    ed[key] = event?.target?.value || "";
+    this.setState({ workExperience: ed });
+  }
+
   async handleSubmit(event: any) {
     event.preventDefault();
 
     if (typeof window != "undefined") {
       const user = JSON.parse(localStorage.getItem("user")!) as any;
 
-      console.log(user);
       const resp = await fetch("/api/portfolio", {
         method: "POST",
         headers: {
@@ -76,7 +98,8 @@ class NewPortfolio extends React.Component<
       });
 
       const json = await resp.json();
-      console.log(json);
+      Router.push("./");
+
     }
   }
 
@@ -102,11 +125,11 @@ class NewPortfolio extends React.Component<
             <form onSubmit={this.handleSubmit}>
               <CardContent>
                 <Typography
-                  sx={{ fontSize: 14 }}
-                  color="text.secondary"
+                  sx={{ fontSize: 20, fontWeight: "bold", mb: 5,fontFamily: "Roboto"}}
+                  color="text.primary"
                   gutterBottom
                 >
-                  Word of the Day
+                  Education
                 </Typography>
 
                 <TextField
@@ -188,23 +211,113 @@ class NewPortfolio extends React.Component<
                     this.setState({ education: ed });
                   }}
                 />
-              </CardContent>
 
-              <CardActions>
-                <Button size="small" type="submit">
-                  Save changes
-                </Button>
-              </CardActions>
-            </form>
-          </TabPanel>
-          <TabPanel value={this.state.selectedTab} index={1}>
-            <WorkExperience />
-          </TabPanel>
-          <TabPanel value={this.state.selectedTab} index={2}>
-            <Achievements />
-          </TabPanel>
-        </Box>
-      </Card>
+                {/* TODO: add work experience forms here  */}
+                <Typography
+                  sx={{ fontSize: 20, fontWeight: "bold", mb: 5,fontFamily: "Roboto"}}
+                  color="text.primary"
+                  gutterBottom
+                >
+                  Work Experience
+                </Typography>
+
+                <TextField
+                  required
+                  id="company"
+                  label="Company Name"
+                  variant="outlined"
+                  name="company"
+                  fullWidth
+                  margin="normal"
+                  value={this.state.workExperience.company}
+                  onChange={(e) => {
+                    this.handleWorkExperienceFormChange(e, "company");
+                  }}
+                />
+
+                <TextField
+                  required
+                  id="position"
+                  label="Position"
+                  variant="outlined"
+                  name="position"
+                  fullWidth
+                  margin="normal"
+                  value={this.state.workExperience.position}
+                  onChange={(e) => {
+                    this.handleWorkExperienceFormChange(e, "position");
+                  }}
+                />
+
+                <TextField
+                  required
+                  id="role"
+                  label="Role"
+                  variant="outlined"
+                  name="role"
+                  fullWidth
+                  margin="normal"
+                  multiline
+                  value={this.state.workExperience.role}
+                  onChange={(e) => {
+                    this.handleWorkExperienceFormChange(e, "role");
+                  }}
+                />
+
+                <TextField
+                  required
+                  id="from"
+                  label="Year you joined the company"
+                  variant="outlined"
+                  name="from"
+                  fullWidth
+                  margin="normal"
+                  type="number"
+                  value={this.state.workExperience.from}
+                  onChange={(e) => {
+                    this.handleWorkExperienceFormChange(e, "from");
+                  }}
+
+
+                />
+
+                <TextField
+                  required
+                  id="to"
+                  label="Year you left the company"
+                  variant="outlined"
+                  name="to"
+                  fullWidth
+                  margin="normal"
+                  type="number"
+
+                  value={this.state.workExperience.to}
+                  onChange={(e) => {
+                    this.handleWorkExperienceFormChange(e, "to");
+                  }}
+                />
+
+
+            </CardContent>
+
+
+
+
+            <CardActions>
+              <Button size="small" type="submit">
+                Save changes
+              </Button>
+            </CardActions>
+          </form>
+        </TabPanel>
+        <TabPanel value={this.state.selectedTab} index={1}>
+          <WorkExperience />
+        </TabPanel>
+        <TabPanel value={this.state.selectedTab} index={2}>
+          <Achievements />
+        </TabPanel>
+      </Box>
+      </Card >
     );
   }
 }
